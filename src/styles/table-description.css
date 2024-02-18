@@ -44,14 +44,22 @@
   flex-grow: 1;
   align-items: center;
   justify-content: flex-end;
+  gap: 10px;
 }
-.header-delete-container button {
+
+.header-delete-all-btn,
+.header-delete-selected-btn {
   height: auto;
   font-size: 16px;
   padding: 1px 10px;
   border-radius: 10px;
-  transition: 100ms;
+}
+.header-delete-selected-btn {
   background: rgb(255, 224, 203);
+}
+.header-delete-all-btn {
+  background: rgba(255, 134, 134, 0.788);
+  color: white;
 }
 
 .table-container {

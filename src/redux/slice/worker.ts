@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit'
 import {
   addWorker,
+  deleteAllWorkers,
   deleteWorkers,
   editWorker,
   getWorkers,
@@ -71,6 +72,19 @@ export const deleteWorkersThunk = createAsyncThunk<
     }
   }
 )
+
+export const deleteAllWorkersThunk = createAsyncThunk<
+  { message: string; newCount: number; companyId: string },
+  { companyId: string },
+  { rejectValue: SerializedError }
+>('worker/all/delete', async ({ companyId }, { rejectWithValue }) => {
+  try {
+    const response = await deleteAllWorkers({ companyId })
+    return { ...response, newCount: 0, companyId }
+  } catch (error) {
+    return rejectWithValue(error as SerializedError)
+  }
+})
 
 export const addWorkerThunk = createAsyncThunk<
   {
@@ -146,6 +160,19 @@ const workerSlice = createSlice({
         state.isLoading = true
       })
       .addCase(deleteWorkersThunk.rejected, (state, { payload }) => {
+        state.isLoading = false
+        state.error = payload
+      })
+
+      .addCase(deleteAllWorkersThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false
+        state.workers = []
+        state.count = payload.newCount
+      })
+      .addCase(deleteAllWorkersThunk.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteAllWorkersThunk.rejected, (state, { payload }) => {
         state.isLoading = false
         state.error = payload
       })

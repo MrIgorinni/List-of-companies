@@ -2,6 +2,7 @@ import TableDescription from './TableDescription'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import {
   addWorkerThunk,
+  deleteAllWorkersThunk,
   deleteWorkersThunk,
   editWorkerThunk,
   getWorkersThunk,
@@ -53,6 +54,22 @@ const WorkersTable = ({ selectedCompanyId }: WorkersTableProps) => {
       })
   }
 
+  const deleteAllWorkers = () => {
+    dispatch(deleteAllWorkersThunk({ companyId: selectedCompanyId })).then(
+      ({ meta, payload }) => {
+        if (
+          meta.requestStatus === 'fulfilled' &&
+          payload &&
+          'companyId' in payload
+        ) {
+          const { companyId, newCount } = payload
+          dispatch(changeCompanyCount({ companyId, newCount }))
+          return { newCount }
+        }
+      }
+    )
+  }
+
   const addNewWorker = (newWorker: NewWorker) => {
     dispatch(addWorkerThunk({ newWorker, companyId: selectedCompanyId })).then(
       ({ meta, payload }) => {
@@ -80,6 +97,7 @@ const WorkersTable = ({ selectedCompanyId }: WorkersTableProps) => {
       totalNumberItems={workersCount}
       headers={WORKERS_TABLE_HEADER}
       deleteSelectedIds={deleteSelectedIds}
+      deleteAllItems={deleteAllWorkers}
       addNewItem={addNewWorker}
       getItems={getWorkers}
       saveEditedItem={saveEditedWorker}

@@ -6,6 +6,7 @@ type TableHeaderProps = {
   totalNumberItems: number
   selectedItems: number
   handleDeleteSelected: () => void
+  handleDeleteAll: () => void
 }
 
 const TableHeader = ({
@@ -14,6 +15,7 @@ const TableHeader = ({
   totalNumberItems,
   selectedItems,
   handleDeleteSelected,
+  handleDeleteAll,
 }: TableHeaderProps) => (
   <div className='table-header'>
     <p className='header-title'>{title}</p>
@@ -30,11 +32,20 @@ const TableHeader = ({
           <span className='header-count-selected'>{selectedItems}</span>
         </p>
       </div>
-      {selectedItems > 0 && (
-        <div className='header-delete-container'>
-          <button onClick={handleDeleteSelected}>Удалить выделенное</button>
-        </div>
-      )}
+
+      <div className='header-delete-container'>
+        {selectedItems > 0 && (
+          <button
+            className='header-delete-selected-btn'
+            onClick={handleDeleteSelected}
+          >
+            Удалить выделенное
+          </button>
+        )}
+        <button className='header-delete-all-btn' onClick={handleDeleteAll}>
+          Удалить всё
+        </button>
+      </div>
     </div>
   </div>
 )

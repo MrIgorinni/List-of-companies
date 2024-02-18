@@ -64,6 +64,12 @@ export const deleteCompanies = async ({ ids }: { ids: string[] }) => {
   return response
 }
 
+export const deleteAllCompanies = async () => {
+  saveInLocalStorage(LOCAL_STORAGE_COMPANIES, [])
+  const response = { message: 'succses' }
+  return response
+}
+
 export const addCompany = async ({
   newCompany,
 }: {
@@ -157,6 +163,31 @@ export const deleteWorkers = async ({
     company.id === companyId
       ? { ...company, workersCount: company.workersCount - ids.length }
       : company
+  )
+  saveInLocalStorage(LOCAL_STORAGE_COMPANIES, newCompanies)
+
+  const response = { message: 'succses' }
+  return response
+}
+
+export const deleteAllWorkers = async ({
+  companyId,
+}: {
+  companyId: string
+}) => {
+  const localeStorageWorkers: { [key in string]: Worker[] } =
+    getFromLocalStorage(LOCAL_STORAGE_WORKERS)
+
+  if (companyId in localeStorageWorkers) {
+    localeStorageWorkers[companyId] = []
+    saveInLocalStorage(LOCAL_STORAGE_WORKERS, localeStorageWorkers)
+  }
+
+  const localeStorageCompanies: Company[] = getFromLocalStorage(
+    LOCAL_STORAGE_COMPANIES
+  )
+  const newCompanies = localeStorageCompanies.map((company) =>
+    company.id === companyId ? { ...company, workersCount: 0 } : company
   )
   saveInLocalStorage(LOCAL_STORAGE_COMPANIES, newCompanies)
 

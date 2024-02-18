@@ -2,6 +2,7 @@ import TableDescription from './TableDescription'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import {
   addCompanyThunk,
+  deleteAllCompaniesThunk,
   deleteCompaniesThunk,
   editCompanyThunk,
   getCompaniesThunk,
@@ -34,6 +35,10 @@ const CompaniesTable = ({ handleSelectCompanyId }: CompaniesTableProps) => {
     })
   }
 
+  const deleteAllCompanies = () => {
+    dispatch(deleteAllCompaniesThunk())
+  }
+
   const addNewCompany = (newCompany: NewCompany) => {
     dispatch(addCompanyThunk({ newCompany }))
   }
@@ -50,6 +55,7 @@ const CompaniesTable = ({ handleSelectCompanyId }: CompaniesTableProps) => {
       headers={COMPANY_TABLE_HEADER}
       handleSelectItemId={handleSelectCompanyId}
       deleteSelectedIds={deleteSelectedIds}
+      deleteAllItems={deleteAllCompanies}
       addNewItem={addNewCompany}
       getItems={getCompanies}
       saveEditedItem={saveEditedCompany}

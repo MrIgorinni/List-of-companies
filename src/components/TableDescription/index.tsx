@@ -14,6 +14,7 @@ type TableDescriptionProps<TItem, TNewItem, TEditedItem> = {
   headers: TableHeaders[]
   handleSelectItemId?: (id: string) => void
   deleteSelectedIds: (ids: string[]) => void
+  deleteAllItems: () => void
   addNewItem: (item: TNewItem) => void
   getItems: (offset: number) => Promise<void>
   saveEditedItem: (editedItem: TEditedItem) => void
@@ -30,6 +31,7 @@ const TableDescription = <
   totalNumberItems,
   handleSelectItemId,
   deleteSelectedIds,
+  deleteAllItems,
   addNewItem,
   getItems,
   saveEditedItem,
@@ -38,6 +40,11 @@ const TableDescription = <
 
   const handleDeleteSelected = () => {
     deleteSelectedIds(selectedItemsIds)
+    setSelectedItemsIds([])
+  }
+
+  const handleDeleteAll = () => {
+    deleteAllItems()
     setSelectedItemsIds([])
   }
 
@@ -58,6 +65,7 @@ const TableDescription = <
         totalNumberItems={totalNumberItems}
         selectedItems={selectedItemsIds.length}
         handleDeleteSelected={handleDeleteSelected}
+        handleDeleteAll={handleDeleteAll}
       />
       <Table
         body={body}

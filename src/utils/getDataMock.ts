@@ -126,7 +126,7 @@ function getRandomAddress() {
 
 const getMock = () => {
   // Генерация массива компаний
-  const companiesMock = Array.from({ length: 50 }, (_, index) => {
+  const companiesMock = Array.from({ length: 700 }, (_, index) => {
     const compName = companyNames[getRandomInt(0, companyNames.length - 1)]
     return {
       id: `${index}-${compName}-compId`,

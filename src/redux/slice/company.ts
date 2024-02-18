@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import {
   addCompany,
+  deleteAllCompanies,
   deleteCompanies,
   editCompany,
   getCompanies,
@@ -53,6 +54,19 @@ export const deleteCompaniesThunk = createAsyncThunk<
 >('company/list/delete', async ({ ids }, { rejectWithValue }) => {
   try {
     const response = await deleteCompanies({ ids })
+    return response
+  } catch (error) {
+    return rejectWithValue(error as SerializedError)
+  }
+})
+
+export const deleteAllCompaniesThunk = createAsyncThunk<
+  { message: string },
+  undefined,
+  { rejectValue: SerializedError }
+>('company/all/delete', async (_, { rejectWithValue }) => {
+  try {
+    const response = await deleteAllCompanies()
     return response
   } catch (error) {
     return rejectWithValue(error as SerializedError)
@@ -120,7 +134,7 @@ const companySlice = createSlice({
         state.error = payload
       })
 
-      .addCase(deleteCompaniesThunk.fulfilled, (state, { payload, meta }) => {
+      .addCase(deleteCompaniesThunk.fulfilled, (state, { meta }) => {
         state.isLoading = false
         state.companies = state.companies.filter(
           (company) =>
@@ -132,6 +146,19 @@ const companySlice = createSlice({
         state.isLoading = true
       })
       .addCase(deleteCompaniesThunk.rejected, (state, { payload }) => {
+        state.isLoading = false
+        state.error = payload
+      })
+
+      .addCase(deleteAllCompaniesThunk.fulfilled, (state) => {
+        state.isLoading = false
+        state.companies = []
+        state.count = 0
+      })
+      .addCase(deleteAllCompaniesThunk.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteAllCompaniesThunk.rejected, (state, { payload }) => {
         state.isLoading = false
         state.error = payload
       })
