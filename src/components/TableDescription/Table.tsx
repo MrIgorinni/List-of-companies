@@ -42,6 +42,7 @@ const Td = ({
   resetEdited,
 }: TdProps) => {
   const isNumber = typeof value === 'number'
+  const isCanEdited = name !== 'workersCount'
   return (
     <td className='item-container'>
       {isEdited ? (
@@ -63,12 +64,14 @@ const Td = ({
         </div>
       ) : (
         <div className='item-text-container'>
-          <button
-            className='item-edit-button'
-            onClick={() => openEditedInput({ id, name })}
-          >
-            Редактировать
-          </button>
+          {isCanEdited && (
+            <button
+              className='item-edit-button'
+              onClick={() => openEditedInput({ id, name })}
+            >
+              Редактировать
+            </button>
+          )}
           <p>{value}</p>
         </div>
       )}
