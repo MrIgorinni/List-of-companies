@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/List-of-companies/static/css/main.96effdbc.css",
+    "main.js": "/List-of-companies/static/js/main.0df8af0e.js",
+    "index.html": "/List-of-companies/index.html",
+    "main.96effdbc.css.map": "/List-of-companies/static/css/main.96effdbc.css.map",
+    "main.0df8af0e.js.map": "/List-of-companies/static/js/main.0df8af0e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96effdbc.css",
+    "static/js/main.0df8af0e.js"
+  ]
+}
