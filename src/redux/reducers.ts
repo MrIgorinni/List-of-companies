@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import company from './slice/company'
-import workers from './slice/workers'
+import worker from './slice/worker'
 
 const rootReducers = combineReducers({
   company,
-  workers,
+  worker,
 })
 
 export default rootReducers

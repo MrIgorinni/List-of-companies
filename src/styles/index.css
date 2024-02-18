@@ -32,7 +32,7 @@ body {
   width: 100%;
   font-size: 100%;
   line-height: 1;
-  font-size: 14px;
+  font-size: 18px;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -49,6 +49,10 @@ input::-ms-clear {
 }
 button {
   cursor: pointer;
+  transition: 100ms;
+}
+button:hover {
+  transform: scale(1.02);
 }
 button::-moz-focus-inner {
   padding: 0;
@@ -76,4 +80,15 @@ h5,
 h6 {
   font-size: inherit;
   font-weight: 400;
+}
+
+body {
+  background: linear-gradient(60deg, #eecfba8c, #c5dde877),
+    url(https://images.squarespace-cdn.com/content/v1/566b24550e4c116bdcfa63ce/1497117339452-1SL5PDA5DIG7NO1I6ZH9/Writing+From+Where+You+Are.Web.png?format=2500w);
+  background-size: cover;
+  padding: 30px;
+  height: 100%;
+  color: white;
+  overflow-y: auto;
+  background-attachment: fixed;
 }
