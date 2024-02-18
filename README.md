@@ -1,9 +1,12 @@
 # List of companies
 
-Here are two tables with data.
-They have the following functionality: deleting, adding, editing.
-There is also an endless scroll.
-Only used: React JS, Redux Toolkit, Typescript
+Here are two tables with data.\
+They have the following functionality: deleting, adding, editing.\
+There is also an endless scroll.\
+Only used: React JS, Redux Toolkit, Typescript\
+
+
+You can see the result here: https://mrigorinni.github.io/List-of-companies/
 
 
 ## Available Scripts
